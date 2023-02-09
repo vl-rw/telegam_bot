@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "google-tts-api": "^2.0.2",
+    "node-telegram-bot-api": "^0.59.0"
+  }
+}
