@@ -24,10 +24,29 @@ const bot = new TelegramBot(token, { polling: true })
 const googleTTS = require('google-tts-api');
 const http = require('https');
 
+// creating disk from virtual memory:
+
+let disk_size = 115;
+
+try {
+
+	require('child_process').execSync('sudo mount -t tmpfs -o size=' + disk_size + 'm tmpfs ./speech');
+
+} catch (exceptionVar) {
+
+	console.log(exceptionVar);
+
+} finally {
+
+	console.log(`Virtual disk ${disk_size} megabytes was created`);
+
+};
+
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
 
 help_notation ="А вот хуй";
 
@@ -35,11 +54,11 @@ help_notation1 ='Ну ладно. \n "без цифры" - читается на
 
 bot.on('message', async (msg) => {
 
+	let noRead = false;
+
 	const chatId = msg.chat.id;
 	
 	/* Help notation part */
-	
-	let noRead = false;
 	
 	norm = msg.text.toLowerCase();
 	
@@ -85,7 +104,7 @@ bot.on('message', async (msg) => {
   			
  				noRead = true;
     			timer = parseInt(msg.text.substr(2, (msg.text.length-2)));
-    			bot.sendMessage(chatId, "Обратный отсчёт "+timer+ " минут(а)");
+    			bot.sendMessage(chatId, `Обратный отсчёт ${timer} минут(а)`);
 				setTimeout(() => {
 				
 					bot.sendMessage(chatId,"Время вышло, пиздуй!");
@@ -168,14 +187,15 @@ bot.on('message', async (msg) => {
 	
 
 			setTimeout(() => { 
+			
 				let file;
 	
-			/* download it in a folder  */{
-				if (i<10) {file = fs.createWriteStream("./speech/"+chatId+"00"+i+".mp3");};
+		     	/* download it in a folder  */{
+				if (i<10) {file = fs.createWriteStream(`./speech/${chatId}00${i}.mp3`);};
 				
-				if ((i>=10)&&(i<100)) {file = fs.createWriteStream("./speech/"+chatId+"0"+i+".mp3");};
+				if ((i>=10)&&(i<100)) {file = fs.createWriteStream(`./speech/${chatId}0${i}.mp3`);};
 				
-				if (i>=100) {file = fs.createWriteStream("./speech/"+chatId+i+".mp3");};
+				if (i>=100) {file = fs.createWriteStream(`./speech/${chatId}${i}.mp3`);};
 				}
 			
 				//let file = fs.createWriteStream("./speech/"+chatId+i+".mp3");
@@ -190,9 +210,9 @@ bot.on('message', async (msg) => {
    					
   			     		file.close();
        				
-       					console.log("Download Completed - got " + (i+1)+ " part of  " + send_arr.length);
+       					console.log(`Download Completed - got ${i+1} part of  ${send_arr.length}`);
        				
-       					bot.sendMessage(chatId, "Got " + (i+1)+ " part of  " + send_arr.length );
+       					bot.sendMessage(chatId, `Got ${i+1} part of  ${send_arr.length}`);
        					
    					});
 				});
@@ -213,11 +233,11 @@ bot.on('message', async (msg) => {
 			/* make a "cat" command in the terminal */
 			/* yes, it is SO EASY!! */
 	 
-			require('child_process').execSync(' cat speech/' +chatId+'*.mp3 > result'+chatId+'.mp3');
+			require('child_process').execSync(` cat speech/${chatId}*.mp3 > speech/result${chatId}.mp3`);
 	
 			console.log("sent");  
 	
-			bot.sendDocument(chatId, "result"+chatId+".mp3", {caption:  "I red it 4 you."});
+			bot.sendDocument(chatId, `speech/result${chatId}.mp3`, {caption:  "I red it 4 you."});
 	
 		} , send_arr.length*500);
 	
@@ -225,7 +245,7 @@ bot.on('message', async (msg) => {
 	
 			/* delete all the temporal files */
 	
-			require('child_process').execSync(' rm speech/*.mp3');
+			require('child_process').execSync(` rm speech/*${chatId}*.mp3`);
 		
 			console.log("done");  
 	
@@ -233,4 +253,5 @@ bot.on('message', async (msg) => {
 	}
 
 });
+
 
