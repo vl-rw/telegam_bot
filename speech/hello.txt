@@ -1,0 +1,1 @@
+If you see that file, RAM disk wasn't created.
