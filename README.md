@@ -17,17 +17,23 @@ Mp3 file is glued from chunks by linux built-in CAT program.
 ## Telegram version functions
 
 `simple text`     This text would be narrated as english text;
+
 `1 simple text`   This text would be narrated as russian text;
+
 `2 simple text`   This text would be narrated as german text;
+
 `3 15`            This starts a timer for 15 minutes;
+
 
 ### Secret functions
 
 `4 simple text`   This add line `simple text` to `log.txt`
+
 `12345678`        You would get code of this bot - file `safe.js` w/o api
 
 ### Abount virtual memory
 
 This program creates virtual disk 115 mb size. To restore RAM memory, type:
+
 
 `sudo umount ./speech`
