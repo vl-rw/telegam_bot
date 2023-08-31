@@ -1,52 +1,33 @@
-Это проект телеграмм-бота, озвучивающего текст.
+# Telegam_bot
+## This is a telegram bot for generating audiofiles from text
 
-В действительности, для озвучки используются сервера гугла,
-которые не принимают куски текста больше 200 символов.
-Это можно заметить по "случайным" паузам в тексте.
+It uses google servers, feeding it with text chunks up to 195 symbols long, 
+and glue it together in one file.
 
-Бот принимает текст, разбивает его на куски по 195 символов,
-кормит гуглу, забирает в папку и сохраняет с номером, 
-соответствующим id отправителя.
+This file can be sended back to user via telegram, OR you can use desktop
+version - console program sp.js OR you can launch browser-based GUI to 
+get your text narrated.
 
-Когда последний кусок получен, методом cat (встроен
-в Линукс) склеивается единый mp3 файл и посылается взад.
+All the programs are node.js based, and if you need GUI version, you 
+should have Chromium in your system for web page being automatically opened
+(or just change code).
 
-Функции бота:
+Mp3 file is glued from chunks by linux built-in CAT program.
 
-• текст
+## Telegram version functions
 
-Читается на английском;
+`simple text`     This text would be narrated as english text;
+`1 simple text`   This text would be narrated as russian text;
+`2 simple text`   This text would be narrated as german text;
+`3 15`            This starts a timer for 15 minutes;
 
-• 1 текст
+### Secret functions
 
-Читается на русском;
+`4 simple text`   This add line `simple text` to `log.txt`
+`12345678`        You would get code of this bot - file `safe.js` w/o api
 
-• 2 текст
+### Abount virtual memory
 
-Читается на немецком;
+This program creates virtual disk 115 mb size. To restore RAM memory, type:
 
-• 3 x
-
-Устанавливается таймер на x минут;
-
-Эти функции доступны по справке. Секретные функции:
-
-• 4 текст
-
-Отправленный текст сохраняется в log.txt;
-
-• 12345678
-
-Отправляется safe.js - предполагается, что это код бота с 
-пустым API (можно запустить у себя, но со своим API)
-
-** upd. 4.3.23: **
-
-Файл sp.js используется для загрузки текста из файла text.txt и перегонки в mp3 звук через терминал.
-
-** upd. 13.08.23: **
-
-Added virtual disk from RAM to save the actual disk.
-To stop it, type:
-
-sudo umount ./speech
+`sudo umount ./speech`
