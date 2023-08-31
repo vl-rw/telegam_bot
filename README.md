@@ -37,3 +37,7 @@ This program creates virtual disk 115 mb size. To restore RAM memory, type:
 
 
 `sudo umount ./speech`
+
+### Also
+
+If you like this web gui, go see it [there][(https://vl-rw.github.io/my_site/](https://vl-rw.github.io/my_site/program/stuff/webgui/index.html)https://vl-rw.github.io/my_site/program/stuff/webgui/index.html) or get it [here.](https://github.com/vl-rw/node_web_gui)
