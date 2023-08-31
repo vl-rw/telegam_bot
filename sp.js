@@ -22,11 +22,20 @@ fs.readFile('text.txt', 'utf8', (err, data) => {
   arrayMaker();
 });
 
-
-
-const language = 'en';
+let lang = 'en';
+fs.readFile('lang.txt', 'utf8', (err, data) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  //console.log(data.split(' '));
+  language =  data.toString();
+  
+});
 
 const chatId = 'from_console_prog_';
+
+send_arr = [];
 
 async function arrayMaker() {
 
@@ -38,7 +47,7 @@ async function arrayMaker() {
 	
 	//words_arr = data.split(' ');
 
-	send_arr = [];
+	
 		
 	//array.length = parseInt(1+msg.text.length/200);
 	
@@ -133,10 +142,10 @@ async function toSound() {
 			/* make a "cat" command in the terminal */
 			/* yes, it is SO EASY!! */
 	 
-			require('child_process').execSync(' cat speech/' +chatId+'*.mp3 > result'+chatId+'.mp3');
+			require('child_process').execSync('cat ./speech/* > ./result.mp3');
 	
 	
-		} , send_arr.length*500);
+		} , send_arr.length*1500);
 	
 		setTimeout(() => { 
 	
@@ -146,7 +155,7 @@ async function toSound() {
 		
 			console.log("done");  
 	
-		} , (send_arr.length+1)*500);
+		} , (send_arr.length+1)*3500);
 		
 
 

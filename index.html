@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>wind</title>
+<!-- <link rel="stylesheet" href="./style.css" /> -->
+
+<link href="styles.css" rel="stylesheet" />
+<style>
+
+
+</style>
+
+</head>
+	<body>
+	
+<div id="window">
+
+<div id="header1"></div>
+<div id="header2"></div>
+<div id="header3"></div>
+
+
+
+<div id="button1" class="topbutton" onclick="closeW()"><p>&#10006;</p></div>
+<div id="button2" class="topbutton" onclick="wideW()" ><p>&#11036;</p></div>
+<div id="button3" class="topbutton" onclick="dashW()"><p>&mdash;</p></div>
+
+
+
+<div id="headerText"><p>&emsp14;&#9398;&emsp14;&emsp14;&emsp14;Text reader</p></div>
+
+<br>
+
+<div class="container">
+
+
+
+
+
+<p style="color: #000" id="label">Paste your tetx here, choose language and press the button:</p>
+
+
+<textarea id="text_area" style="width: 100%" class="disableable">If you see this, smth went wrong</textarea>
+<br>
+
+
+<br><br><br>
+<fieldset class="grid" style="color: #000">
+    <legend id="legend"><button onClick="button_clicked()" >Create mp3 file!</button></legend>
+    
+    
+	<div class="form-check column">
+    <div class="column">
+      <input type="radio" id="huey" name="drone" value="en" onClick="ws.send('en');"  class="disableable"
+             checked>
+      <label for="huey">English</label>
+    </div>
+
+    <div>
+      <input type="radio" id="dewey" name="drone" value="ru" onClick="ws.send('ru');" class="disableable">
+      <label for="dewey">Russian</label>
+    </div>
+
+    <div>
+      <input type="radio" id="louie" name="drone" value="de" onClick="ws.send('de');" class="disableable">
+      <label for="louie">Deutsch</label>
+    </div>
+    </div>
+    
+    
+	
+	
+</fieldset>
+
+
+
+
+
+
+</div>
+</div>
+
+
+<script src="ws_html.js"></script>
+      
+<script src="drag_html.js"></script>
+
+<script>
+
+was_sended = false;
+
+function button_clicked() {
+
+	if (!was_sended) {
+	
+	was_sended = true;
+	
+	ws.send(text_area.value);
+	
+	myElements = document.querySelectorAll('.disableable');
+	
+
+	for (let element = 0; element < myElements.length; element++) {
+    		
+    	myElements[element].setAttribute('disabled', '');
+    		
+    };
+    
+    } else { console.log("pass");};
+		
+}
+</script>
+
+</body></html>

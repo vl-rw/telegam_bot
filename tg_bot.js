@@ -1,4 +1,5 @@
 /* 
+npm i ws
 
 npm i node-telegram-bot-api
 
@@ -12,6 +13,8 @@ cd /home/pc/tg_bot
 
 node tg_bot.js
 
+sudo umount ./speech
+
 
 */
 
@@ -19,7 +22,7 @@ node tg_bot.js
 
 const TelegramBot = require('node-telegram-bot-api')
 const fs = require("fs");
-const token = 'YOUR-API-KEY'
+const token = 'YOUR_API_HERE'
 const bot = new TelegramBot(token, { polling: true })
 const googleTTS = require('google-tts-api');
 const http = require('https');
